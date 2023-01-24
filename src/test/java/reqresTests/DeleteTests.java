@@ -14,6 +14,7 @@ public class DeleteTests extends ReqresTestConfig {
                 .pathParam("userId", 6)
                 .when()
                 .delete(ReqresEndpoints.SINGLE_USER)
-                .then();
+                .then()
+                .statusCode(204);;
     }
 }

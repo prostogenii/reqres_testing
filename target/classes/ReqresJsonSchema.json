@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "default": {},
+  "title": "Root Schema",
+  "required": [
+    "data",
+    "support"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "default": {},
+      "title": "The data Schema",
+      "required": [
+        "id",
+        "email",
+        "first_name",
+        "last_name",
+        "avatar"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "default": 0,
+          "title": "The id Schema",
+          "examples": [
+            3
+          ]
+        },
+        "email": {
+          "type": "string",
+          "default": "",
+          "title": "The email Schema",
+          "examples": [
+            "emma.wong@reqres.in"
+          ]
+        },
+        "first_name": {
+          "type": "string",
+          "default": "",
+          "title": "The first_name Schema",
+          "examples": [
+            "Emma"
+          ]
+        },
+        "last_name": {
+          "type": "string",
+          "default": "",
+          "title": "The last_name Schema",
+          "examples": [
+            "Wong"
+          ]
+        },
+        "avatar": {
+          "type": "string",
+          "default": "",
+          "title": "The avatar Schema",
+          "examples": [
+            "https://reqres.in/img/faces/3-image.jpg"
+          ]
+        }
+      },
+      "examples": [{
+        "id": 3,
+        "email": "emma.wong@reqres.in",
+        "first_name": "Emma",
+        "last_name": "Wong",
+        "avatar": "https://reqres.in/img/faces/3-image.jpg"
+      }]
+    },
+    "support": {
+      "type": "object",
+      "default": {},
+      "title": "The support Schema",
+      "required": [
+        "url",
+        "text"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "default": "",
+          "title": "The url Schema",
+          "examples": [
+            "https://reqres.in/#support-heading"
+          ]
+        },
+        "text": {
+          "type": "string",
+          "default": "",
+          "title": "The text Schema",
+          "examples": [
+            "To keep ReqRes free, contributions towards server costs are appreciated!"
+          ]
+        }
+      },
+      "examples": [{
+        "url": "https://reqres.in/#support-heading",
+        "text": "To keep ReqRes free, contributions towards server costs are appreciated!"
+      }]
+    }
+  },
+  "examples": [{
+    "data": {
+      "id": 3,
+      "email": "emma.wong@reqres.in",
+      "first_name": "Emma",
+      "last_name": "Wong",
+      "avatar": "https://reqres.in/img/faces/3-image.jpg"
+    },
+    "support": {
+      "url": "https://reqres.in/#support-heading",
+      "text": "To keep ReqRes free, contributions towards server costs are appreciated!"
+    }
+  }]
+}

@@ -19,7 +19,8 @@ public class PutTests extends ReqresTestConfig {
                 .body(newUser)
                 .when()
                 .put(ReqresEndpoints.SINGLE_USER)
-                .then();
+                .then()
+                .statusCode(200);
 
     }
 }

@@ -21,7 +21,6 @@ public class ReqresTestConfig {
                 .build();
 
         RestAssured.responseSpecification = new ResponseSpecBuilder()
-                .expectStatusCode(200)
                 .build();
     }
 }

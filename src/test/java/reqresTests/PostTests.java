@@ -2,6 +2,7 @@ package reqresTests;
 
 import config.ReqresEndpoints;
 import config.ReqresTestConfig;
+import objects.ReqresObject;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.given;
@@ -18,7 +19,8 @@ public class PostTests extends ReqresTestConfig {
                 .body(sergey)
                 .when()
                 .post(ReqresEndpoints.CREATE_USER)
-                .then();
+                .then()
+                .statusCode(201);
 
     }
 
@@ -33,6 +35,18 @@ public class PostTests extends ReqresTestConfig {
                         .body(user)
                         .when()
                         .post(ReqresEndpoints.LOG_IN_USER)
-                        .then();
+                        .then()
+                        .statusCode(201);
+    }
+
+    @Test
+    public void createUserUsingObjTest(){
+        ReqresObject reqresObject = new ReqresObject("Misha", "builder");
+        given()
+                .body(reqresObject)
+                .when()
+                .post(ReqresEndpoints.CREATE_USER)
+                .then()
+                .statusCode(201);
     }
 }

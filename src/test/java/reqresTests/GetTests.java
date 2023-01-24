@@ -2,6 +2,7 @@ package reqresTests;
 
 import config.ReqresEndpoints;
 import config.ReqresTestConfig;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +23,8 @@ public class GetTests extends ReqresTestConfig {
                 .when()
                 .get(ReqresEndpoints.SINGLE_USER)
                 .then()
-                .body("email", equalTo("janet.weaver@reqres.in"));
+                .body("email", equalTo("janet.weaver@reqres.in"))
+                .statusCode(200);
     }
 
     @Test
@@ -30,7 +32,8 @@ public class GetTests extends ReqresTestConfig {
         given()
                 .when()
                 .get("users?page=2")
-                .then();
+                .then()
+                .statusCode(200);;
     }
 
     @Test
@@ -59,6 +62,17 @@ public class GetTests extends ReqresTestConfig {
             System.out.println(ollUsersNames.get(i)+" "+ollUserLastNames.get(i));
         }
 
+    }
+
+    @Test
+    public void checkUserUsingJsonSchema(){
+        given()
+                .pathParam("userId", 3)
+                .when()
+                .accept("application/json")
+                .get(ReqresEndpoints.SINGLE_USER)
+                .then()
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("ReqresJsonSchema.json"));
     }
 
 }
