@@ -7,6 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
+import java.util.List;
+
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -40,6 +43,21 @@ public class GetTests extends ReqresTestConfig {
 
         String contentType = response.getContentType();
         System.out.println(contentType);
+
+    }
+
+    @Test
+    public void getAllNamesFromTheList(){
+       Response response = get("users?page=2/data")
+               .then()
+               .extract().response();
+
+        List<String> ollUsersNames = response.path("data.first_name");
+        List<String> ollUserLastNames = response.path("data.last_name");
+
+        for (int i=0; i<ollUsersNames.size(); i++){
+            System.out.println(ollUsersNames.get(i)+" "+ollUserLastNames.get(i));
+        }
 
     }
 
