@@ -1,5 +1,6 @@
 package reqresTests;
 
+import ReqresPojoObj.DataResponse;
 import config.ReqresEndpoints;
 import config.ReqresTestConfig;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -73,6 +74,18 @@ public class GetTests extends ReqresTestConfig {
                 .get(ReqresEndpoints.SINGLE_USER)
                 .then()
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("ReqresJsonSchema.json"));
+    }
+
+    @Test
+    public void getAUserWithPojoClass(){
+        Response response =
+        given()
+                .pathParam("userId", 6)
+                .when()
+                .get(ReqresEndpoints.SINGLE_USER);
+        DataResponse dataResponse = response.getBody().as(DataResponse.class);
+
+        System.out.println(dataResponse.toString());
     }
 
 }
