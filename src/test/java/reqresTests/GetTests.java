@@ -1,6 +1,7 @@
 package reqresTests;
 
 import ReqresPojoObj.DataResponse;
+import ReqresPojoObj.Root;
 import config.ReqresEndpoints;
 import config.ReqresTestConfig;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -14,6 +15,7 @@ import java.util.List;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.lessThan;
 
 public class GetTests extends ReqresTestConfig {
 
@@ -24,7 +26,6 @@ public class GetTests extends ReqresTestConfig {
                 .when()
                 .get(ReqresEndpoints.SINGLE_USER)
                 .then()
-                .body("email", equalTo("janet.weaver@reqres.in"))
                 .statusCode(200);
     }
 
@@ -34,7 +35,8 @@ public class GetTests extends ReqresTestConfig {
                 .when()
                 .get("users?page=2")
                 .then()
-                .statusCode(200);;
+                .time(lessThan(1000L))
+                .statusCode(200);
     }
 
     @Test
@@ -42,7 +44,7 @@ public class GetTests extends ReqresTestConfig {
         Response response = given()
                 .pathParam("userId", 1)
                 .get(ReqresEndpoints.SINGLE_USER)
-                .then()
+                .then().time(lessThan(1000L))
                 .extract().response();
 
         String contentType = response.getContentType();
@@ -83,9 +85,12 @@ public class GetTests extends ReqresTestConfig {
                 .pathParam("userId", 6)
                 .when()
                 .get(ReqresEndpoints.SINGLE_USER);
-        DataResponse dataResponse = response.getBody().as(DataResponse.class);
 
-        System.out.println(dataResponse.toString());
+        Root root = response.as(Root.class);
+
+        Assert.assertEquals(root.data.id, 6);
+        Assert.assertEquals(root.data.email, "tracey.ramos@reqres.in");
+
     }
 
 }

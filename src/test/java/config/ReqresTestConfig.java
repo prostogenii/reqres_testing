@@ -7,6 +7,8 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.BeforeClass;
 
+import static org.hamcrest.Matchers.lessThan;
+
 public class ReqresTestConfig {
 
     @BeforeClass
@@ -21,6 +23,7 @@ public class ReqresTestConfig {
                 .build();
 
         RestAssured.responseSpecification = new ResponseSpecBuilder()
+                .expectResponseTime(lessThan(3000L))
                 .build();
     }
 }
