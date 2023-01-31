@@ -1,5 +1,7 @@
 package reqresTests;
 
+import ReqresPojoObj.DataResponse;
+import ReqresPojoObj.Root;
 import config.ReqresEndpoints;
 import config.ReqresTestConfig;
 import objects.ReqresObject;

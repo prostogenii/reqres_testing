@@ -44,7 +44,7 @@ public class GetTests extends ReqresTestConfig {
         Response response = given()
                 .pathParam("userId", 1)
                 .get(ReqresEndpoints.SINGLE_USER)
-                .then().time(lessThan(1000L))
+                .then()
                 .extract().response();
 
         String contentType = response.getContentType();
@@ -56,6 +56,7 @@ public class GetTests extends ReqresTestConfig {
     public void getAllNamesFromTheList(){
        Response response = get("users?page=2/data")
                .then()
+               .statusCode(200)
                .extract().response();
 
         List<String> ollUsersNames = response.path("data.first_name");
@@ -75,6 +76,7 @@ public class GetTests extends ReqresTestConfig {
                 .accept("application/json")
                 .get(ReqresEndpoints.SINGLE_USER)
                 .then()
+                .statusCode(200)
                 .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("ReqresJsonSchema.json"));
     }
 

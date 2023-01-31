@@ -15,6 +15,6 @@ public class DeleteTests extends ReqresTestConfig {
                 .when()
                 .delete(ReqresEndpoints.SINGLE_USER)
                 .then()
-                .statusCode(204);;
+                .statusCode(204);
     }
 }
